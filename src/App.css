@@ -3,3 +3,7 @@ position:absolute;
 color: red;
 font-size: 0.6rem;
 }
+
+form img{
+  position:absolute;
+}
