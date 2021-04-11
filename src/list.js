@@ -1,12 +1,14 @@
-// import React from 'react'
+import React from 'react'
+let name = localStorage.getItem('MyList');
+function list(props) {
+    return (
+        <div> 
+        <h1>The List is :</h1>
+        <br/>
+        <br/>
+        {name}    
+        </div>
+    )
+}
 
-// function list(props) {
-//     return (
-//         const [list, setlist] = useState(props)
-//         <div>
-            
-//         </div>
-//     )
-// }
-
-// export default list
+export default list

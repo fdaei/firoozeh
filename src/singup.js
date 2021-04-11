@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState ,useEffect} from "react"
 import { Formik, Form } from "formik"
 import { TextField } from "./TextField"
 import * as yup from "yup"
@@ -38,6 +38,9 @@ function SignUp() {
       .oneOf([yup.ref("PassWord"), null], "password must match")
       .required("Confirm password is requyired"),
   })
+  useEffect(()=>{
+    localStorage.setItem("MyList", (JSON.stringify(list)));
+  }, [list])
   return (
     <Formik
       initialValues={{
