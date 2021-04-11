@@ -49,9 +49,9 @@ function SignUp() {
       }}
       validationSchema={validate}
       onSubmit={(values, actions) => {
-          console.log('ok')
+        console.log('ok')
         setTimeout(() => {
-          Object.values(values).forEach(item => setList(prev => [...prev, item]))
+          setList(prev => [...prev, values])
           console.log(values)
           actions.setSubmitting(false)
         }, 1000)
@@ -71,8 +71,13 @@ function SignUp() {
             <button className="btn btn-danger mt-3 ml-3" type="reset">
               Reset
             </button>
-            {list.map(item => (
-              <div>{item}</div>
+            {list.map((items,index) => (
+              <>
+                <br />
+                <button onClick={()=>setList(prev=> prev.filter((item,i)=>i !== index))} >x</button>
+                {Object.values(items).map(item => <div>{item}</div>)}
+                <br />
+              </>
             ))}
           </div>
         </Form>

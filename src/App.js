@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import Imgadd from './ax.png';
 import Sign from './singup';
 function App() {
