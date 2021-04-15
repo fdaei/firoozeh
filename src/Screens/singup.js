@@ -1,7 +1,8 @@
 import React, { useState ,useEffect} from "react"
 import { Formik, Form } from "formik"
-import { TextField } from "./TextField"
+import { TextField } from "../Components/TextField"
 import * as yup from "yup"
+import { useHistory } from "react-router"
 // import list from './list';
 const fields = [
   {
@@ -26,7 +27,8 @@ const fields = [
   },
 ]
 function SignUp() {
-  const [list, setList] = useState([])
+  // const [list, setList] = useState([])
+  const history = useHistory()
 
   const validate = yup.object().shape({
     FirstName: yup.string().required("Required").max(15, "must be less than 16 characters"),
@@ -38,9 +40,9 @@ function SignUp() {
       .oneOf([yup.ref("PassWord"), null], "password must match")
       .required("Confirm password is requyired"),
   })
-  useEffect(()=>{
-    localStorage.setItem("MyList", (JSON.stringify(list)));
-  }, [list])
+  // useEffect(()=>{
+  //   localStorage.setItem("MyList", (JSON.stringify(list)));
+  // }, [list])
   return (
     <Formik
       initialValues={{
@@ -52,12 +54,17 @@ function SignUp() {
       }}
       validationSchema={validate}
       onSubmit={(values, actions) => {
-        console.log('ok')
-        setTimeout(() => {
-          setList(prev => [...prev, values])
-          console.log(values)
-          actions.setSubmitting(false)
-        }, 1000)
+        // console.log('ok')
+        // setTimeout(() => {
+          // setList(prev => [...prev, values])
+          // console.log(values)
+          // actions.setSubmitting(false)
+        // }, 1000)
+        localStorage.clear();
+        localStorage.setItem("MyBoolean", true);
+        localStorage.setItem("MyList",JSON.stringify(values))
+        history.push(`/List/${values.FirstName}/${values.LastName}`)
+        actions.setSubmitting(false)
       }}
     >
       {props => (
@@ -74,14 +81,14 @@ function SignUp() {
             <button className="btn btn-danger mt-3 ml-3" type="reset">
               Reset
             </button>
-            {list.map((items,index) => (
+            {/* {list.map((items,index) => (
               <>
                 <br />
                 <button onClick={()=>setList(prev=> prev.filter((item,i)=>i !== index))} >x</button>
                 {Object.values(items).map(item => <div>{item}</div>)}
                 <br />
               </>
-            ))}
+            ))} */}
           </div>
         </Form>
       )}
