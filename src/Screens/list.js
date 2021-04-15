@@ -19,12 +19,12 @@ function List(props) {
       <br />
       {Name}
       <button onClick={() => {
-        history.goBack();
-      }}>click </button>
+        history.push("/");
+      }}>go to login</button>
       <button onClick={() => {
-        history.goBack();
-        localStorage.clear();
-      }}>click and clear</button>
+        localStorage.removeItem("Auth");
+        history.push("/");
+      }}>logout</button>
     </div>
   )
 }

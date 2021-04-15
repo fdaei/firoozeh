@@ -1,21 +1,11 @@
-import React from 'react'
-import{Route,Redirect} from 'react-router-dom';
+import React from "react"
+import { Route, Redirect } from "react-router-dom"
+import { apiService } from "../Api"
 
-function ProtectedRoute({isAuth: isAuth,component:Component, ...rest }) {
-    return (
-        <div>
-            <Route  {...rest} 
-                render={(props)=>{
-                    if(isAuth){
-                        return<Component />;
-                    }
-                    else{
-                        return<Redirect to="/" />;
-                    }
-                }}
-            />
-        </div>
-    )
+function ProtectedRoute({ component, ...props }) {
+  const isAuth = apiService.checkAuth()
+  if (isAuth) return <Route {...props}>{component}</Route>
+  return <Redirect to={{ pathname: "/", state: { from: props.location.pathname } }} />
 }
 
 export default ProtectedRoute

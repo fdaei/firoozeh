@@ -3,7 +3,7 @@ import React, { useState,useEffect } from "react";
 import Imgadd from "./Images/ax.png";
 import Sign from "./Screens/singup"
 import List from "./Screens/list"
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom"
 import ProtectedRoute from './Components/ProtectedRoute';
 function App() {
   const Bool=localStorage.getItem("MyBoolean");
@@ -21,7 +21,8 @@ function App() {
           <div className="col-sm-5">
             <Switch>
               <Route exact path="/" component={Sign} />
-              <ProtectedRoute path="/List/:name/:family" component={List}  isAuth={Bool}/> 
+              <ProtectedRoute path="/List/:name/:family" component={List}/>
+              <Route path="*"><Redirect to="/"/></Route>
             </Switch>
           </div>
         </div>

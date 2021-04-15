@@ -1,8 +1,8 @@
-import React, { useState ,useEffect} from "react"
+import React, { useState, useEffect } from "react"
 import { Formik, Form } from "formik"
 import { TextField } from "../Components/TextField"
 import * as yup from "yup"
-import { useHistory } from "react-router"
+import { useHistory, useLocation } from "react-router"
 // import list from './list';
 const fields = [
   {
@@ -29,6 +29,7 @@ const fields = [
 function SignUp() {
   // const [list, setList] = useState([])
   const history = useHistory()
+  const location = useLocation()
 
   const validate = yup.object().shape({
     FirstName: yup.string().required("Required").max(15, "must be less than 16 characters"),
@@ -56,14 +57,15 @@ function SignUp() {
       onSubmit={(values, actions) => {
         // console.log('ok')
         // setTimeout(() => {
-          // setList(prev => [...prev, values])
-          // console.log(values)
-          // actions.setSubmitting(false)
+        // setList(prev => [...prev, values])
+        // console.log(values)
+        // actions.setSubmitting(false)
         // }, 1000)
-        localStorage.clear();
-        localStorage.setItem("MyBoolean", true);
-        localStorage.setItem("MyList",JSON.stringify(values))
-        history.push(`/List/${values.FirstName}/${values.LastName}`)
+        // localStorage.clear()
+        console.log("submit")
+        localStorage.setItem("Auth", true)
+        localStorage.setItem("MyList", JSON.stringify(values))
+        history.push(location?.state?.from ? location?.state?.from : `/List/${values.FirstName}/${values.LastName}`)
         actions.setSubmitting(false)
       }}
     >
