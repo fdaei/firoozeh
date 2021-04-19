@@ -1,9 +1,12 @@
+body{
+  color:white;
+  img{
+    height: 90vh;
+    width: 20vw;
+  }
+}
 .error{
 position:absolute;
 color: red;
 font-size: 0.6rem;
-}
-
-form img{
-  position:absolute;
 }

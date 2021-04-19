@@ -5,7 +5,7 @@ import { apiService } from "../Api"
 function ProtectedRoute({ component, ...props }) {
   const isAuth = apiService.checkAuth()
   if (isAuth) return <Route {...props}>{component}</Route>
-  return <Redirect to={{ pathname: "/", state: { from: props.location.pathname } }} />
+  return <Redirect to={{ pathname: "../Screens/ERROR", state: { from: props.location.pathname } }} />
 }
 
 export default ProtectedRoute

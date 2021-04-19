@@ -1,6 +1,7 @@
 import "./Scss/App.scss";
+import React_Image from './Images/1 Xt3l-_54wuxdsHpiolGP3g.jpeg';
 import React, { useState,useEffect } from "react";
-import Imgadd from "./Images/ax.png";
+import Error2 from "./Screens/ERROR";
 import Sign from "./Screens/singup"
 import List from "./Screens/list"
 import { BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom"
@@ -15,14 +16,12 @@ function App() {
     <Router>
       <div className="container mt-3">
         <div className="row">
-          <div className="col-sm-7">
-            <img className="img-fluid w-100" src={Imgadd} className="img-fluid w-100" />
-          </div>
-          <div className="col-sm-5">
+          <div className="col-sm-12">
             <Switch>
               <Route exact path="/" component={Sign} />
               <ProtectedRoute path="/List/:name/:family" component={List}/>
-              <Route path="*"><Redirect to="/"/></Route>
+              <Route exact path="/Error" component={Error2} />
+              <Route path="*"><Redirect to="/Error"/></Route>
             </Switch>
           </div>
         </div>

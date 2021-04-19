@@ -3,6 +3,7 @@ import { Formik, Form } from "formik"
 import { TextField } from "../Components/TextField"
 import * as yup from "yup"
 import { useHistory, useLocation } from "react-router"
+import { apiService } from "../Api"
 // import list from './list';
 const fields = [
   {
@@ -62,10 +63,10 @@ function SignUp() {
         // actions.setSubmitting(false)
         // }, 1000)
         // localStorage.clear()
-        console.log("submit")
-        localStorage.setItem("Auth", true)
         localStorage.setItem("MyList", JSON.stringify(values))
-        history.push(location?.state?.from ? location?.state?.from : `/List/${values.FirstName}/${values.LastName}`)
+        apiService.setAuth(true)
+        console.log(location?.state?.from)
+        history.push(location?.state?.from || `/List/${values.FirstName}/${values.LastName}`)
         actions.setSubmitting(false)
       }}
     >
@@ -77,7 +78,7 @@ function SignUp() {
             {fields.map((item, index) => (
               <TextField key={index} label={item.name} name={item.name} type={item.type} />
             ))}
-            <button className="btn btn-dark mt-3" type="submit">
+            <button className="btn btn-success mt-3" type="submit">
               Register
             </button>
             <button className="btn btn-danger mt-3 ml-3" type="reset">
